@@ -112,3 +112,84 @@ We can catch 0 or more whitespaces with
 ```js
 /foo\s*bar/
 ```
+
+### character classes []
+
+character class represents "one of the characters". It represents only one character position
+
+```txt
+include:
+foo
+coo
+loo
+
+exclude:
+moo
+doo
+poo
+boo
+hoo
+```
+
+
+inclusion list:
+  (f | c | l)   |   oo
+
+  we can catch them by
+
+```js
+/[fcl]oo/
+```
+
+#### exponent operator inside character class, ^ symbol
+
+sometimes it is better to use exclussiong list.
+We can use [^abc]. This symbolises - any character, excluding "abc"
+
+```txt
+include:
+foo
+coo
+doo
+poo
+loo
+
+exclude:
+moo
+hoo
+```
+```js
+/[^mh]oo/
+```
+
+#### ranges inside character classes
+
+we can give a ascii range. For example [a-c]. "a" ascii value is 97 and "c" is 99/
+
+```txt
+include:
+aee
+bee
+cee
+
+exclude:
+dee
+gee
+fee
+
+
+outlier:
+xee
+```
+
+we can catch this pattern by:
+
+```js
+/[a-c]ee/
+```
+
+assuming we want to catch chars in range but also 'x'
+
+```js
+/[a-cx]ee/
+```

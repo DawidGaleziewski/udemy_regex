@@ -193,3 +193,113 @@ assuming we want to catch chars in range but also 'x'
 ```js
 /[a-cx]ee/
 ```
+
+uppercase is its own range. We can specify more then one range
+for example this will catch 3 groups of characters a,b,c  A,B,C,  and x
+
+```js
+/[a-cA-Cx]/
+```
+
+
+## escaping with backslash symbol \
+
+```txt
+include:
+xxx.yy
+xx.yyy
+x.yy
+
+exclude:
+xy
+xxxy
+xxy
+```
+
+we can catch the dot with \.
+
+```js
+/x*\.y*/
+```
+
+We can escape special symbols like *, ., $.
+We should always escape symbols that have a regex meaning
+
+```txt
+include:
+x#y
+x:y
+x.y
+
+exclude
+x&y
+x%y
+```
+
+inside character classs we do not need to escape period that is a special character. Due to fact that period inside [] has no special function and is interpreted always literally
+
+```js
+/x[#:.]y/ // by inclusion
+/x[^&%]y/ // using ^ exclusion
+```
+
+characters that have their function inside character class needs to be escaped:
+
+```js
+/x[#:\^]y/
+```
+
+```txt
+x^y
+```
+
+literal backslash should always be escaped with another backslash
+
+```js
+/x\\y/
+```
+
+```txt
+x\y
+```
+
+## anchors symbol ^ and $
+
+placeholder siginifing the beggining of the line.
+It meaning changes inside brackets[] where it stands for negation
+
+```txt
+include:
+goo bar baz
+goo baz bar
+
+exclude:
+baz foo bar
+bar foo baz
+```
+
+```js
+/^goo.*/
+```
+
+```txt
+include:
+foo zee nar
+goo foo nar
+
+exclude:
+nee nar foo
+nar zee bee
+```
+
+ dollar $ symbol is a placeholder for a end of a line
+
+```js
+/.*nar$/
+```
+
+We can combine those two to find pattern that only starts and ends with something:
+
+```js
+/^foo$/
+```

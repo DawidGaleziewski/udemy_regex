@@ -56,3 +56,13 @@ sed  -r 's/([0-9]+)x([0-9]+)/1 pix by \2 pix/g' filename.txt
 /\1 pix by \2 pix/
 ```
 
+## example 
+format names
+
+John Wallace -> Wallace,John
+
+```js
+/([a-zA-Z]+)\s([a-zA-Z]+)/
+//
+```
+
